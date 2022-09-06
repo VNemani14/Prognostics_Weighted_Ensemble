@@ -1,0 +1,30 @@
+tt=(1:m)';
+figure()
+plot(tt,actRUL,'--k','linewidth',1.5)
+hold all
+
+modelno = 6; % Enall
+mypred = eval("p"+num2str(modelno));
+mys = eval("s"+num2str(modelno));
+
+sigmafac=1; % plot width factor
+upper = mypred+sigmafac*mys; upper(isnan(upper))=0.01;
+lower = mypred-sigmafac*mys; lower(isnan(lower))=0.01;
+fill([tt;flipud(tt)], [upper;flipud(lower)], 'r', 'Facealpha', 0.3, 'linestyle', 'none')
+plot(tt, mypred,'r','linewidth',1.5)
+
+modelno = 8; % DSDEn
+mypred = eval("p"+num2str(modelno));
+mys = eval("s"+num2str(modelno));
+
+sigmafac=1; % plot width factor
+upper = mypred+sigmafac*mys; upper(isnan(upper))=0.01;
+lower = mypred-sigmafac*mys; lower(isnan(lower))=0.01;
+fill([tt;flipud(tt)], [upper;flipud(lower)], 'b', 'Facealpha', 0.3, 'linestyle', 'none')
+plot(tt, mypred,'b','linewidth',1.5)
+
+legend('True', 'En-all','','DSDEn','')
+xlabel('Time from FPT')
+ylabel('RUL')
+
+ylim([0 m+30])

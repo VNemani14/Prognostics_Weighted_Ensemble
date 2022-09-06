@@ -1,0 +1,34 @@
+% Function to postprocess 
+
+
+function [RMSE,RMSEwt,alphaacc,mybeta,myPEP,myNLL]=get_postprocess(actRUL,mypred,mystd)
+    
+    m=length(actRUL);
+    mystd(mystd==0)=1;
+%     mystd(mystd==0)=max(mystd);
+%     mystd(isnan(mystd))=max(mystd);
+    %calculate RMSE and wtRMSE
+    [RMSE, RMSEwt]=get_rms(actRUL,mypred);
+    
+    %calculate beta accuracy
+    myfac=0.25; % 25 prcent
+    act_upper=actRUL.*(1+myfac);
+    act_lower=actRUL.*(1-myfac);
+    mybeta=mean(normcdf(act_upper,mypred,mystd)-normcdf(act_lower,mypred,mystd), 'omitnan');
+    
+    %alpha accuracy
+    myscore=(mypred>=act_lower)+(mypred<=act_upper);
+    alphaacc=sum(myscore==2)/m*100;
+    
+    %calculate PEP
+    myPEP=sum(mypred<=actRUL, 'omitnan')/m*100;
+    
+    %get NLL
+%     myNLL=mean(medfilt1(log(mystd.^2)./2+(actRUL-mypred).^2./2./(mystd.^2),8), 'omitnan');
+    full_arr=log(mystd.^2)./2+(actRUL-mypred).^2./2./(mystd.^2);
+%     full_arr(full_arr>200)=2000;
+%     myNLL=mean(full_arr, 'omitnan');
+%     myNLL=median(full_arr, 'omitnan'); %take the last 30%
+    asd =sort(full_arr);
+    myNLL=mean(asd(1:floor(m/4)), 'omitnan'); %take the last 30%
+end
