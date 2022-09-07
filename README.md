@@ -1,6 +1,6 @@
 # Opimization-based Ensemble Weighting for Prognostics
 
-This repository contains parts of code for the publication "Degradation-Aware Ensemble of DiversePredictorsfor Remaining Useful Life Prediction" by _Venkat Nemani, Adam Thelen, Chao Hu, and Steve Daining_ submitted to **Journal of Mechanical Design** (JMD) special issue on _Selected IDETC Conference Papers_. The conference paper is titled "Dynamically Weighted Ensemble of Diverse Learners for Remaining Useful Life Prediction" published in **ASME 2022 International Design Engineering Technical Conference** (IDETC), 2022, pp. 1–8
+This repository contains parts of code for the publication "Degradation-Aware Ensemble of DiversePredictorsfor Remaining Useful Life Prediction" by _Venkat Nemani, Adam Thelen, Chao Hu, and Steve Daining_ submitted to **Journal of Mechanical Design (JMD)** special issue on _Selected IDETC Conference Papers_. The conference paper is titled "Dynamically Weighted Ensemble of Diverse Learners for Remaining Useful Life Prediction" published in **ASME 2022 International Design Engineering Technical Conference (IDETC)** , 2022, pp. 1–8
 
 In this code repository we share:
 - Remaning useful life (RUL) prediction of batteries using Exponential Unscented Kalman Filter (EUKF), Gaussian Process Regression (GPR) and Long Short-term Memory (LSTM). Each of these models provide RUL uncertainty quantification at every prediction time step. 
