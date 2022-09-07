@@ -1,4 +1,4 @@
-# Opimization-based Ensemble Weighting for Prognostics
+# Optimization-based Weighting for Ensemble Prognostics
 
 This repository contains parts of the code for the manuscript titled "Degradation-Aware Ensemble of DiversePredictorsfor Remaining Useful Life Prediction" by _Venkat Nemani, Adam Thelen, Chao Hu, and Steve Daining_ submitted to the **Journal of Mechanical Design (JMD)** special issue on _"Selected Papers from IDETC 2022"_. The conference paper is titled "Dynamically Weighted Ensemble of Diverse Learners for Remaining Useful Life Prediction" and was presented at the **ASME 2022 International Design Engineering Technical Conference (ASME IDETC 2022)** on August 16, 2022.
 
