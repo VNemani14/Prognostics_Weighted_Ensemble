@@ -27,8 +27,8 @@ function [xV,predRUL,sRUL, tfor, yfor, sfor]=get_ExpUKFstatesEn_battery(HI,cutf,
     xx=1:nskip+1:Noriginal;
 
 
-    s=[HI(1);0.1;0.1; 0.1];   % initial state
-    x=s+q.*randn(n,1);           % initial state with noise
+    s=[HI(1);0.1;0.1; 0.1];     % initial state
+    x=s+q.*randn(n,1);          % initial state with noise
 
     xV = zeros(n,N);          %allocating memory
     sV = zeros(n,N);          
@@ -41,9 +41,7 @@ function [xV,predRUL,sRUL, tfor, yfor, sfor]=get_ExpUKFstatesEn_battery(HI,cutf,
         zV(k)  = z;                             % save measurement
         [x, P] = ukf(f,x,P,h,z,Q,R);            % ukf to get updated state and covariance 
         xV(:,k) = x;                            % save estimate
-%         if k~=N
-            s = f(s) + q.*randn(n,1);               % update process
-%         end
+        s = f(s) + q.*randn(n,1);               % update process
     end
 
     % do the forecast
@@ -52,15 +50,14 @@ function [xV,predRUL,sRUL, tfor, yfor, sfor]=get_ExpUKFstatesEn_battery(HI,cutf,
     tfor(1)=0;
     for kk=1:400
         z = yfor(kk)+xV(2,k)*dt+xV(3,k)*xV(1,k)*exp(xV(4,k)*dt);                              % measurement
-        sV(:,kk)= s;                             % save actual state
-        zV(kk)  = z;                             % save measurement
-        [x, P] = ukf(f,x,P,h,z,Q,R);            % ukf to get updated state and covariance 
-        xV(:,kk) = x;                            % save estimate
-%          s = f(s) + q.*randn(n,1);
+        sV(:,kk)= s;                            
+        zV(kk)  = z;                             
+        [x, P] = ukf(f,x,P,h,z,Q,R);             
+        xV(:,kk) = x;                           
         yfor(kk+1)=xV(1,kk);
         sfor(kk+1)=P(1,1);
         tfor(kk+1)=tfor(kk)+dt;
-        if yfor(kk+1)>=cutf
+        if yfor(kk+1)>=cutf  %cutoff reached
             predRUL=kk*dt;
             break
         else
@@ -68,20 +65,7 @@ function [xV,predRUL,sRUL, tfor, yfor, sfor]=get_ExpUKFstatesEn_battery(HI,cutf,
         end 
     end
     
-    
-%     yfor(1)=xV(1,k);
-%     tfor(1)=0;
-%     for iter=1:250
-%         
-%         yfor(iter+1)=yfor(iter)+xV(2,k)*dt+xV(3,k)*xV(1,k)*exp(xV(4,k)*dt);
-%         tfor(iter+1)=tfor(iter)+dt;
-%         if yfor(iter+1)>=cutf
-%             predRUL=iter*dt;
-%             break
-%         else
-%             predRUL=NaN;
-%         end 
-%     end
+
     tfor=tfor';
     yfor=yfor';
     sfor=sqrt(sfor');
@@ -92,7 +76,7 @@ function [xV,predRUL,sRUL, tfor, yfor, sfor]=get_ExpUKFstatesEn_battery(HI,cutf,
     if isnan(predRUL)
         sRUL=NaN;
     else
-        sRUL = (interp1(yfor, tfor, cutf)-interp1(upper, tfor, cutf));
+        sRUL = (interp1(yfor, tfor, cutf)-interp1(upper, tfor, cutf));  % sigmaRUL ~ RUL(HI)-RUL(HI+sigma)
     end
 end
 
