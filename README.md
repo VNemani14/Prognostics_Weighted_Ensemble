@@ -30,5 +30,11 @@ In this code repository we share:
 `ModelEnsemble` folder combines individual model predictions from `Individual_models`
 - `Ensemble_models.m` is the main file that determines optimizes weights (for DIEn and DSDEn) using thet training dataset and evaluates on the test datasets. This file uses `Results_EUKF_GPR_LSTM_RUL.mat` which consists appended individual model RUL predictions. This code also plots the RUL for any train/test battery and also plots the calibration curve of observed confidence to expected confidence. Sample plots are shown below. 
 
+<p align="center">
+  <img src="/ModelEnsemble/RUL_sample.jpg" width="400" />
+  <img src="/ModelEnsemble/calibration_sample.jpg" width="400" />
+</p>
 
+The calibration curve in the paper is a result of multiple independent runs. 
 
+NOTE: Please contact Venkat Nemani (nemani1401@gmail.com) or Chao Hu (huchaostu@gmail.com) for any queries.
