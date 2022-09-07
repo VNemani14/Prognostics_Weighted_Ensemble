@@ -14,7 +14,7 @@ In this code repository we share:
     
 - Postprocess results in relation to prediction accuracy and uncertainty quantification: root-mean-squarred error (RMSE), weighted RMSE (giving more importance close to end-of-life predictions), alpha accuracy, beta probability and median of negative log likelihood. See image below for visualization of some of the metrics
 <p align="center">
-<img src="https://user-images.githubusercontent.com/94071944/188748621-f7d73cef-9962-4edc-bf5d-cadb178b3d77.png" alt="drawing" width="300"/>
+<img src="https://user-images.githubusercontent.com/94071944/188748621-f7d73cef-9962-4edc-bf5d-cadb178b3d77.png" alt="drawing" width="400"/>
 </p>
 
 ## Code description
